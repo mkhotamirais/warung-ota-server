@@ -26,7 +26,7 @@ const setCookie = (res, name, token) => {
     secure: true,
     httpOnly: true,
     // maxAge: 30 * 24 * 60 * 60 * 1000,
-    sameSite: "Lax",
+    sameSite: "None",
     // path: "/",
   });
 };
@@ -35,7 +35,7 @@ const removeCookie = (res, name) => {
   res.clearCookie(`${name}`, {
     secure: true,
     httpOnly: true,
-    sameSite: "Lax",
+    sameSite: "None",
     // expires: new Date(0),
     // path: "/",
   });
