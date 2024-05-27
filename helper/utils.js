@@ -27,7 +27,7 @@ const setCookie = (res, name, token) => {
     httpOnly: true,
     // maxAge: 30 * 24 * 60 * 60 * 1000,
     sameSite: "None",
-    // path: "/",
+    path: "/",
   });
 };
 
@@ -37,7 +37,7 @@ const removeCookie = (res, name) => {
     httpOnly: true,
     sameSite: "None",
     // expires: new Date(0),
-    // path: "/",
+    path: "/",
   });
 };
 
