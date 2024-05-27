@@ -16,6 +16,7 @@ const allowedOrigins = [
   "https://mkhotamirais.my.id",
   "https://mkhotamirais.github.io",
   "https://mkhotami.vercel.app",
+  "https://warung-ota.vercel.app",
   "http://localhost:3000",
   "http://localhost:5173",
   "http://localhost:5174",

@@ -1,7 +1,6 @@
-const { err, ok } = require("../../mkhotami-vercel-server/helper/utils");
-const { hashPass } = require("../helper/utils");
 const User = require("../models/userModel");
 const validator = require("validator");
+const { ok, err, hashPass } = require("../helper/utils");
 
 const getUsers = async (req, res) => {
   try {
