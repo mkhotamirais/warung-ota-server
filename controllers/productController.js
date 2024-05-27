@@ -1,4 +1,4 @@
-const { err, ok } = require("../../mkhotami-vercel-server/helper/utils");
+const { ok, err } = require("../helper/utils");
 const Product = require("../models/productModel");
 
 const getProducts = async (req, res) => {
