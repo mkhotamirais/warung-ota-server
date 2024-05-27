@@ -39,11 +39,12 @@ const signin = async (req, res) => {
 // required token
 const signout = async (req, res) => {
   try {
-    const match = await User.findOne({ token: { $in: req.cookies.accessToken } });
+    const token = req.cookies.accessToken;
+    const match = await User.findOne({ token: { $in: token } });
     if (!match) return err(res, 403, `forbidden: token tidak valid`);
     removeCookie(res, "accessToken");
-    const data = await findByIdAndUpdate(match._id, { $pull: { token } }, { new: true });
-    ok(res, 200, `logout ${data.username} success`);
+    const data = await User.findByIdAndUpdate(match._id, { $pull: { token } }, { new: true });
+    ok(res, 200, `logout ${data.username} success`, data);
   } catch (error) {
     err(res, 400, error);
   }
