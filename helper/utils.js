@@ -23,19 +23,21 @@ const setToken = (data) => jwt.sign(data, at, { expiresIn: "3d" });
 
 const setCookie = (res, name, token) => {
   res.cookie(`${name}`, token, {
+    secure: true,
     httpOnly: true,
     maxAge: 30 * 24 * 60 * 60 * 1000,
-    sameSite: "None",
-    secure: true,
+    sameSite: "Strict",
+    path: "/",
   });
 };
 
 const removeCookie = (res, name) => {
   res.clearCookie(`${name}`, {
-    httpOnly: true,
-    sameSite: "None",
     secure: true,
+    httpOnly: true,
+    sameSite: "Strict",
     expires: new Date(0),
+    path: "/",
   });
 };
 
