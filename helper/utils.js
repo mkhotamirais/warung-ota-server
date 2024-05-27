@@ -35,7 +35,7 @@ const removeCookie = (res, name) => {
     httpOnly: true,
     sameSite: "None",
     secure: true,
-    // expires: new Date(0)
+    expires: new Date(0),
   });
 };
 
