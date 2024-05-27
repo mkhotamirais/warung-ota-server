@@ -22,14 +22,11 @@ const allowedOrigins = [
   "http://localhost:5174",
 ];
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-app.use(cookieParser());
 app.use((req, res, next) => {
   if (allowedOrigins.includes(req.headers.origin)) res.header("Access-Control-Allow-Credentials", true);
   next();
 });
+
 const corsOptions = {
   origin: function (origin, callback) {
     allowedOrigins.indexOf(origin) !== -1 || !origin ? callback(null, true) : callback(new Error("Not allowed by CORS"));
@@ -37,6 +34,9 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
   res.send(`welcome to warungota server`);
