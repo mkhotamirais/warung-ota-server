@@ -3,17 +3,20 @@ const Product = require("../models/productModel");
 
 const getProducts = async (req, res) => {
   try {
-    const { q = "", category = "", tag = [], sort = "name" } = req.query;
+    const { skip = 0, limit = 0, q = "", category = "", tag = [], sort = "name" } = req.query;
     let criteria;
     if (q.length) criteria = { ...criteria, name: { $regex: `${q}`, $options: "i" } };
     if (category.length) criteria = { ...criteria, category };
     if (tag.length) criteria = { ...criteria, tag: { $in: tag } };
+    const count = await Product.countDocuments(criteria);
     const data = await Product.find(criteria)
+      .skip(parseInt(skip))
+      .limit(parseInt(limit))
       .sort(sort)
       .populate({ path: "category", select: ["name"] })
       .populate({ path: "tag", select: ["name"] })
       .populate({ path: "user", select: ["username"] });
-    ok(res, 200, `getProducts`, data);
+    res.status(200).json({ message: `getProducts`, data, count });
   } catch (error) {
     err(res, 400, error);
   }
